@@ -1,0 +1,25 @@
+# Ignore the Dockerfile itself
+
+Dockerfile
+
+# Ignore Docker configuration files
+
+.dockerignore
+
+# Ignore git files
+
+.git
+.gitignore
+
+README.md
+
+.npmrc
+
+.prettierrc
+.prettierignore
+
+.eslint.config.js
+
+.svelte-kit
+node_modules
+build
