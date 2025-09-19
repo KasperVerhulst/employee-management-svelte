@@ -1,6 +1,6 @@
 <script lang="ts">
-	// accept employees as a prop	
-    let  { employees } = $props();
+	// accept employees as a prop
+	let { employees } = $props();
 </script>
 
 <table>
@@ -15,7 +15,7 @@
 		{#each employees as employee}
 			<tr>
 				{#each Object.values(employee) as field}
-				<td>{field}</td>
+					<td>{field}</td>
 				{/each}
 			</tr>
 		{/each}
@@ -38,7 +38,7 @@
 		color: white;
 		text-align: left;
 	}
-	
+
 	th,
 	td {
 		padding: 12px 15px;
