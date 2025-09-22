@@ -1,8 +1,15 @@
-<script>
-	let { text } = $props();
+<script lang="ts">
+	// This Svelte component represents a Button.
+	// It requires two props:
+	// - text: The text to display on the button.
+	// - onclick: A function to execute when the button is clicked.
+	let { text, onclick = undefined } = $props<{
+		text: string;
+		onclick: () => void;
+	}>();
 </script>
 
-<button>{text}</button>
+<button {onclick}>{text}</button>
 
 <style>
 	button {
