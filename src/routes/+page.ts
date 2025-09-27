@@ -4,7 +4,13 @@ This is strictly a feature of SvelteKit, so it won't work in a regular Svelte co
 */
 
 import { PUBLIC_API_URL } from '$env/static/public';
+import { oauth2flow } from '$lib/oauth';
 import type { PageLoad } from './$types';
+import { HttpClient } from '@forgerock/javascript-sdk';
+
+// disable server-side rendering for this page
+// API calls  must be done client-side because it requires the user's token
+export const ssr = false;
 
 interface Employee {
 	ID: number;
@@ -63,8 +69,17 @@ export const load: PageLoad = async ({ fetch }) => {
 	let employees: Employee[] = mock;
 
 	if (PUBLIC_API_URL) {
+		
+		await oauth2flow();
+
 		try {
-			const res = await fetch(PUBLIC_API_URL);
+			const res = await HttpClient.request({
+				url: PUBLIC_API_URL,
+				init: {
+					method: 'GET'
+				},
+				timeout: 5000
+			});
 			if (res.ok) {
 				employees = await res.json();
 			} else {

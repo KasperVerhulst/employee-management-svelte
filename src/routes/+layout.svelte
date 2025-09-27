@@ -1,3 +1,5 @@
+<!-- Layout includes the common border for each page. -->
+<!-- It contains the Navbar and Footer that will be displayed on each page -->
 <script lang="ts">
 	import Footer from './Footer.svelte';
 	import Navbar from './Navbar.svelte';
