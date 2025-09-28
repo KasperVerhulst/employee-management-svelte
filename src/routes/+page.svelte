@@ -7,6 +7,7 @@
 	import FormModal from '$lib/FormModal.svelte';
 	import Button from '$lib/Button.svelte';
 	import { PUBLIC_API_URL } from '$env/static/public';
+	import { HttpClient } from '@forgerock/javascript-sdk';
 
 	// State variable to control the visibility of the Popup
 	let popupModal = $state(false);
@@ -19,10 +20,21 @@
 
 	// This function will be passed to the Modal and executed on form submission
 	async function formsubmission() {
-		const res = await fetch(PUBLIC_API_URL, {
-			method: 'POST',
-			body: JSON.stringify(formData)
+		const res = await HttpClient.request({
+			url: PUBLIC_API_URL,
+			init : {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(formData)
+			},
+			timeout: 5000
 		});
+		// const res = await fetch(PUBLIC_API_URL, {
+		// 	method: 'POST',
+		// 	body: JSON.stringify(formData)
+		// });
 		if (res.ok) {
 			// Close the modal on successful submission
 			closeModal();
