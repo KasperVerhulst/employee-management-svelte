@@ -8,9 +8,21 @@
 	import Button from '$lib/Button.svelte';
 	import { PUBLIC_API_URL } from '$env/static/public';
 	import { HttpClient } from '@forgerock/javascript-sdk';
+	import { checkTokenScope } from '$lib/oauth';
 
 	// State variable to control the visibility of the Popup
 	let popupModal = $state(false);
+	// State variable to control the visibility of the "Add Employee" button
+	let showEmployeeButton: boolean = $state(false);
+
+	async function updateButtonVisibility() {
+		const hasScope = await checkTokenScope('write');
+		showEmployeeButton = hasScope;
+	}
+
+	$effect(() => {
+		updateButtonVisibility();
+	});
 
 	// The Modal will need this function to close itself
 	// Components should not change the state of their parents directly, so pass a predefined function instead
@@ -54,9 +66,12 @@
 </script>
 
 <Table employees={data.employees} />
-<div>
-	<Button onclick={() => (popupModal = true)} text="Add Employee" />
-</div>
+
+{#if showEmployeeButton}
+	<div>
+		<Button onclick={() => (popupModal = true)} text="Add Employee" />
+	</div>
+{/if}
 
 {#if popupModal}
 	<FormModal onclose={closeModal} onsubmit={formsubmission} {entityName} {formData} />
