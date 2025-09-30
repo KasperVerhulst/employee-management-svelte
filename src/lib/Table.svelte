@@ -1,13 +1,20 @@
 <script lang="ts">
 	// accept employees as a prop
 	let { employees } = $props();
+
+	function jsonKeyToTableTitle(key: string): string {
+		// replace underscoe by space
+		const result = key.replace(/_/g, ' ');
+		// uppercase first letter
+		return result.charAt(0).toUpperCase() + result.slice(1);
+	}
 </script>
 
 <table>
 	<thead>
 		<tr>
 			{#each Object.keys(employees[0]) as header}
-				<th>{header}</th>
+				<th>{jsonKeyToTableTitle(header)}</th>
 			{/each}
 		</tr>
 	</thead>
