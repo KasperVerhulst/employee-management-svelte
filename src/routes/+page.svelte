@@ -22,7 +22,7 @@
 	async function formsubmission() {
 		const res = await HttpClient.request({
 			url: PUBLIC_API_URL,
-			init : {
+			init: {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

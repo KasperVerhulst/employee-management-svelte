@@ -5,7 +5,7 @@
 <nav>
 	<ol>
 		<li><a id="home-link" href="/">Home</a></li>
-		<li><Button text="Log in" /></li>
+		<!-- <li><Button text="Change Role" /></li> -->
 	</ol>
 </nav>
 

@@ -69,7 +69,6 @@ export const load: PageLoad = async ({ fetch }) => {
 	let employees: Employee[] = mock;
 
 	if (PUBLIC_API_URL) {
-		
 		await oauth2flow();
 
 		try {
